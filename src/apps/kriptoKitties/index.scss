@@ -1,0 +1,182 @@
+@import './cat';
+@import './animations';
+@import './modal';
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  h1{
+    margin-bottom: 0;
+  }
+}
+
+.navigation{
+  display: flex;
+  a, span{
+    text-decoration: none;
+    color: black;
+    margin:.5em;
+  }
+}
+
+.cat-editor{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cat-box{
+  margin: 50px 25px 50px 25px;
+  padding: 75px 75px 25px 75px;
+  //border: 1px solid #fff3e0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.31);
+}
+
+.cat-colors{
+  width: 50%;
+  margin: 50px 0px 50px 50px;
+  padding: 50px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  .header-group{
+    margin-bottom: 5px;
+    align-self: flex-start;
+    span{
+      background: rgba(255,255,255,0.3);
+      margin: 0 5px;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+.dna {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+button{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    font-weight: 400;
+    font-family: inherit;
+    color: #212529;
+    text-align: center;
+    cursor: pointer;
+    text-transform:capitalize;
+    border: 1px solid transparent;
+    padding: 0.375rem 1.5em;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin:.5em;
+    background:white;
+    text-decoration:none;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+button:hover{
+  box-shadow: none;
+}
+
+.my-kitties-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.breed-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.breed-box{
+  @extend .cat-box;
+  padding-top: 15px;
+  h3, h4{
+    margin: 15px 0 0 0;
+  }
+  img{
+    padding: 50px;
+  }
+}
+
+.breed-box:hover{
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.modal-container{
+  .cat-box{
+    width: 250px;
+  }
+}
+
+.offer-input{
+  display: flex;
+  justify-content: center;
+  margin-top:-20px ;
+  padding: 7px 75px;
+  font-size: 0.9375rem;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  width: 20%;
+  align-items: center;
+  box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.31);
+  input{
+    border: 0;
+    width: 109px;
+    height: 24px;
+    border-radius: 5px;
+    padding: 0.375rem 0.5em;
+    margin: 0.5em;
+  }
+}
+
+.ethereum-logo-small{
+  display: flex;
+  height: 30px;
+}
+
+.offer{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  .price{
+    display: flex;
+    align-items: center;
+    //align-self: flex-start;
+   // margin: 35px 0 0 -60px;
+  }
+  button{
+    display: flex;
+    align-items: center;
+    //align-self: flex-end;
+    //margin: 35px -50px 0 0 ;
+  }
+}
