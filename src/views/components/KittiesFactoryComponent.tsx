@@ -1,10 +1,10 @@
 import React from 'react';
 
-import '../../apps/kriptoKitties/index.scss';
 import { Factory } from '../../Factory';
 import { CatComponent } from './CatComponent';
 import { KittiesFactoryHook } from '../hooks/KittiesFactoryHook';
 import { Layout } from './shared/Layout';
+import { DogComponent } from './DogComponent';
 
 type CssVariables =
 	| '--headChestColor'
@@ -43,7 +43,7 @@ export const KittiesFactoryComponent = () => {
 				<h3>Create your custom Kitty</h3>
 				<div className="cat-editor">
 					<div className="cat-box">
-						<CatComponent dna={queries.dna} />
+						<DogComponent dna={queries.dna} />
 						<div className={'dna'}>
 							<span>{queries.dnaFormatted}</span>
 						</div>

@@ -1,6 +1,7 @@
-@import './cat';
-@import './animations';
-@import './modal';
+@import 'cat';
+@import 'animations';
+@import 'modal';
+@import 'dog';
 .container{
   display: flex;
   flex-direction: column;
