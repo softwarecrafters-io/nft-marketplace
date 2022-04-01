@@ -1,6 +1,8 @@
 :root{
   --headBodyColor: #eb9c25;
-  --mouthBodyTailColor: #fdd6a4;
+  --mouthBellyColor: #fcd6a5;
+  --eyeColor: #7676d8;
+  --tailPawColor: #ffcc80;
   --decorationTransform: rotate(0deg);
   --decorationMiddleColor: #ffb74d;
   --decorationSideColor: #ffb74d;
@@ -75,7 +77,7 @@
 }
 
 .left_outer_pupil{
-  background-color: rgb(131, 131, 244);
+  background-color: var(--eyeColor);
   border-radius: 50%;
   width: 31px;
   height: 38px;
@@ -123,10 +125,11 @@
   height: 60px;
   position: relative;
   top: 17px;
+  left:5px;
 }
 
 .right_outer_pupil{
-  background-color: rgb(131, 131, 240);
+  background-color: var(--eyeColor);
   border-radius: 50%;
   width: 31px;
   height: 38px;
@@ -164,7 +167,7 @@
 
 .ear{
   border-radius: 90px 40px 70px 10px;
-  background-color: rgb(235, 156, 37);
+  background: var(--tailPawColor);
   height: 100px;
   width: 100px;
   position: absolute;
@@ -228,7 +231,7 @@
 
 .chin{
   border-radius: 188px 20px 90px 20px;
-  background-color: rgb(235, 156, 37);
+  background-color: var(--headBodyColor);
   height: 140px;
   width: 140px;
   position: absolute;
@@ -239,7 +242,7 @@
 
 .mouth{
   border-radius: 50%;
-  background-color: #fcd6a5;
+  background: var(--mouthBellyColor);
   height: 95px;
   width: 98px;
   position: absolute;
@@ -250,13 +253,14 @@
 
 .mouth_2{
   border-radius: 50%;
-  background-color: #fcd6a5;
+  background: var(--mouthBellyColor);
   height: 76px;
   width: 128px;
   position: absolute;
   top: 269px;
   left: 43px;
   z-index: 10;
+  opacity: 0.8;
 }
 
 .nose{
@@ -346,7 +350,7 @@
 
 .left_cheek{
   border-radius: 50px 0px 35px 50px;
-  background-color: #ffe2be;
+  background-color: var(--mouthBellyColor);
   height: 40px;
   width: 50px;
   position: absolute;
@@ -357,7 +361,7 @@
 
 .right_cheek{
   border-radius: 0px 50px 50px 35px;
-  background-color: #ffe2be;
+  background-color: var(--mouthBellyColor);
   height: 40px;
   width: 50px;
   position: absolute;
@@ -394,7 +398,7 @@
 }
 
 .belly{
-  background-color: #fcd6a5;
+  background-color: var(--mouthBellyColor);
   width: 76px;
   height: 119px;
   border-radius: 45%;
@@ -406,7 +410,7 @@
 
 .left_foot{
   border-radius: 61px 61px 20px 20px;
-  background-color: #f9e2c4;
+  background: var(--tailPawColor);
   height: 38px;
   width: 60px;
   position: absolute;
@@ -417,7 +421,7 @@
 
 .right_foot{
   border-radius: 61px 61px 20px 20px;
-  background-color: #f9e2c4;
+  background: var(--tailPawColor);
   height: 38px;
   width: 60px;
   position: absolute;
@@ -434,18 +438,20 @@
   position: absolute;
   top: 512px;
   left: -205px;
-  z-index: 2
+  z-index: 2;
+  opacity: 0.9;
 }
 
 .back_right_foot{
   border-radius: 61px 61px 20px 20px;
-  background-color: #e9d4b8;
+  background-color: var(--tailPawColor);
   height: 38px;
   width: 60px;
   position: absolute;
   top: 512px;
   left: -31px;
   z-index: 2;
+  opacity: 0.9;
 }
 
 .left_leg{
@@ -461,7 +467,7 @@
 }
 
 .right_leg{
-  background-color: var(--headBodyColor);
+  background-color: var(--tailPawColor);
   width: 100px;
   height: 125px;
   border-radius: 130px 125px 215px 50px;
@@ -598,11 +604,11 @@
 
 .dog__tail {
   position: absolute;
-  top: 378px;
+  top: 388px;
   left: -46px;
   width: 90px;
   height: 23px;
-  background: var(--mouthBodyTailColor);
+  background: var(--tailPawColor);
   border: 5px solid transparent;
   border-radius: 45%;
   transform: rotate(-45deg);

@@ -1,5 +1,6 @@
 export class Routes {
-	static kittiesFactory = '/';
+	static home = '/';
+	static creation = '/creation';
 	static marketPlace = '/marketplace';
 	static myNfts = '/my-nfts';
 	static breading = '/breading';

@@ -1,6 +1,6 @@
 import { EIP1193Provider, WalletService } from './application-services/walletService';
 import { ContractConfig, ContractConnector } from './application-services/contractConnector';
-import KittyFactoryMetadata from '../artifacts/contracts/KittyFactory.sol/KittyFactory.json';
+import KittyFactoryMetadata from '../artifacts/contracts/NFTCore.sol/NFTCore.json';
 import MarketPlaceMetadata from '../artifacts/contracts/NFTMarketPlace.sol/NFTMarketPlace.json';
 import { NFTInteractor } from './contract-interactors/NFTInteractor';
 import { ethers } from 'ethers';
@@ -11,11 +11,8 @@ import { MarketPlaceService } from './services/MarketPlaceService';
 import { MarketPlaceInteractor } from './contract-interactors/MarketPlaceInteractor';
 
 export class Factory {
-	static readonly greeterAddress = '0xE39D73Bc223fA0A306D365f4402BB243A15a3D4e';
-	static readonly basicTokenAddress = '0x0a54A68EdF7bf87CB7D2E9fA7Bf2792bb2Bc5934';
-	static readonly kryptoAppezAddress = '0xF8Fbb0ADe680f2a913284a7465c277f5c7982Ba6';
-	static readonly kittyFactory = '0x06AD7aF38AE37C88D084a682894744afE5F42617';
-	static readonly marketPlace = '0x61888CC5824106198e09165A2Aa32591CeeD82cd';
+	static readonly nftCoreAddress = '0x544D64fEED5F0DCf9162112B720cD981A3454071';
+	static readonly marketPlaceAddress = '0xB80E3d0A733fb84A2244B0A0e972B3eDb930b1f4';
 	static readonly validChainId = '0x539';
 	static readonly nodeUrl = 'http://127.0.0.1:7545';
 
@@ -67,7 +64,7 @@ export class Factory {
 
 	static getKittyFactoryInteractor() {
 		if (this.nftInteractor == null) {
-			const configContract = ContractConfig.create(this.kittyFactory, KittyFactoryMetadata);
+			const configContract = ContractConfig.create(this.nftCoreAddress, KittyFactoryMetadata);
 			this.nftInteractor = new NFTInteractor(this.getContractConnector(), configContract);
 		}
 		return this.nftInteractor;
@@ -82,7 +79,7 @@ export class Factory {
 
 	static getMarketPlaceInteractor() {
 		if (this.marketPlaceInteractor == null) {
-			const configContract = ContractConfig.create(this.marketPlace, MarketPlaceMetadata);
+			const configContract = ContractConfig.create(this.marketPlaceAddress, MarketPlaceMetadata);
 			return new MarketPlaceInteractor(this.getContractConnector(), configContract);
 		}
 		return this.marketPlaceInteractor;
@@ -90,7 +87,11 @@ export class Factory {
 
 	static getMarketPlaceService() {
 		if (this.marketPlaceService == null) {
-			return new MarketPlaceService(this.getMarketPlaceInteractor(), this.getNftService(), this.marketPlace);
+			return new MarketPlaceService(
+				this.getMarketPlaceInteractor(),
+				this.getNftService(),
+				this.marketPlaceAddress
+			);
 		}
 		return this.marketPlaceService;
 	}

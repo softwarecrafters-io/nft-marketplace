@@ -1,40 +1,40 @@
 import { ethers } from 'hardhat';
-import { KittyFactory } from '../../../typechain-types';
+import { NFTCore } from '../typechain-types';
 import { expect } from 'chai';
 
-describe('The Krypto Kitties Factory', () => {
-	let nft: KittyFactory;
+describe('The NFT Core', () => {
+	let nft: NFTCore;
 
 	beforeEach(async () => {
-		const nftContract = await ethers.getContractFactory('KittyFactory');
-		nft = (await nftContract.deploy()) as KittyFactory;
+		const nftContract = await ethers.getContractFactory('NFTCore');
+		nft = (await nftContract.deploy()) as NFTCore;
 		await nft.deployed();
 	});
 
 	it('has a name', async () => {
 		const name = await nft.name();
-		expect(name).to.equal('Krypto CSS Kitties');
+		expect(name).to.equal('Krypto CSS Doggies');
 	});
 
 	it('has a symbol', async () => {
 		const symbol = await nft.symbol();
-		expect(symbol).to.equal('KCK');
+		expect(symbol).to.equal('KCD');
 	});
 
-	it('increases owner balance when a new generation zero kitty is minted', async () => {
+	it('increases owner balance when a new generation zero is minted', async () => {
 		const [owner] = await ethers.getSigners();
 		const dna = 101112101114141;
 
-		await nft.mintGenerationZeroKitty(dna);
+		await nft.mintGenerationZero(dna);
 
 		const balance = await nft.balanceOf(owner.address);
 		expect(balance).to.equal(1);
 	});
 
-	it('increases counter when a new generation zero kitty is minted', async () => {
+	it('increases counter when a new generation zero is minted', async () => {
 		const dna = 101112101114141;
 
-		await nft.mintGenerationZeroKitty(dna);
+		await nft.mintGenerationZero(dna);
 
 		const counter = await nft.generationZeroCounter();
 		expect(counter).to.equal(1);
@@ -45,29 +45,29 @@ describe('The Krypto Kitties Factory', () => {
 		const dna = 101112101114141;
 		const tokenId = 1;
 
-		await nft.mintGenerationZeroKitty(dna);
+		await nft.mintGenerationZero(dna);
 
 		const address = await nft.ownerOf(tokenId);
 		expect(address).to.equal(owner.address);
 	});
 
-	it('emits a transfer event when a new kitty is minted', async () => {
+	it('emits a transfer event when a new nft is minted', async () => {
 		const [owner] = await ethers.getSigners();
 		const dna = 101112101114141;
 		const tokenId = 1;
 
-		const mint = await nft.mintGenerationZeroKitty(dna);
+		const mint = await nft.mintGenerationZero(dna);
 
 		await expect(mint)
 			.to.emit(nft, 'Transfer')
 			.withArgs('0x0000000000000000000000000000000000000000', owner.address, tokenId);
 	});
 
-	it('emits a birth event when a new kitty is minted', async () => {
+	it('emits a birth event when a new nft is minted', async () => {
 		const [owner] = await ethers.getSigners();
 		const dna = 101112101114141;
 
-		const mint = nft.mintGenerationZeroKitty(dna);
+		const mint = nft.mintGenerationZero(dna);
 
 		await expect(mint).to.emit(nft, 'Birth').withArgs(owner.address, 1, 0, 0, dna);
 	});
@@ -76,54 +76,54 @@ describe('The Krypto Kitties Factory', () => {
 		const [owner, anotherAccount] = await ethers.getSigners();
 		const dna = 101112101114141;
 
-		const mintWithAnotherAccount = nft.connect(anotherAccount).mintGenerationZeroKitty(dna);
+		const mintWithAnotherAccount = nft.connect(anotherAccount).mintGenerationZero(dna);
 		await expect(mintWithAnotherAccount).to.be.revertedWith('Ownable: caller is not the owner');
 	});
 
 	describe('complies with ERC721 Enumerable specification', () => {
-		it('increases total supply when a new generation zero kitty is minted', async () => {
+		it('increases total supply when a new generation zero is minted', async () => {
 			const dna = 101112101114141;
 
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
 
 			const counter = await nft.totalSupply();
 			expect(counter).to.equal(1);
 		});
 
-		it('gets token by index when a new generation zero kitty is minted', async () => {
+		it('gets token by index when a new generation zero is minted', async () => {
 			const dna = 101112101114141;
 
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
 
 			const tokenId = await nft.tokenByIndex(0);
 			expect(tokenId).to.equal(1);
 		});
 
-		it('gets token id by owner and index when a new generation zero kitty is minted', async () => {
+		it('gets token id by owner and index when a new generation zero is minted', async () => {
 			const [owner] = await ethers.getSigners();
 			const dna = 101112101114141;
 
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
 
 			const tokenId = await nft.tokenOfOwnerByIndex(owner.address, 0);
 			expect(tokenId).to.equal(1);
 		});
 	});
 
-	it('gets kitty by id', async () => {
+	it('gets pet by id', async () => {
 		const [owner] = await ethers.getSigners();
 		const dna = 101112101114141;
 
-		await nft.mintGenerationZeroKitty(dna);
+		await nft.mintGenerationZero(dna);
 
-		const kitty = await nft.getKitty(0);
+		const kitty = await nft.getPet(0);
 		expect(kitty.mumId).to.equal(0);
 		expect(kitty.dadId).to.equal(0);
 		expect(kitty.generation).to.equal(0);
 		expect(kitty.genes).to.equal(101112101114141);
 	});
 
-	it('breeds a new cat by mixing the dna of the father and the mother', async () => {
+	it('breeds a new pet by mixing the dna of the father and the mother', async () => {
 		const dadDna = 101112101114141;
 		const mumDna = 303132332234343;
 
@@ -136,26 +136,26 @@ describe('The Krypto Kitties Factory', () => {
 		const dadDna = 101112101114141;
 		const mumDna = 303132332234343;
 
-		await nft.mintGenerationZeroKitty(dadDna);
-		await nft.mintGenerationZeroKitty(mumDna);
+		await nft.mintGenerationZero(dadDna);
+		await nft.mintGenerationZero(mumDna);
 
 		const dadId = 1;
 		const mumId = 2;
 		await nft.breed(dadId, mumId);
-		const newCat = await nft.getKitty(3);
+		const newPet = await nft.getPet(3);
 
-		expect(newCat.genes.toNumber()).to.equal(303112132234141);
-		expect(newCat.dadId).to.equal(dadId);
-		expect(newCat.mumId).to.equal(mumId);
-		expect(newCat.generation).to.equal(1);
+		expect(newPet.genes.toNumber()).to.equal(303112132234141);
+		expect(newPet.dadId).to.equal(dadId);
+		expect(newPet.mumId).to.equal(mumId);
+		expect(newPet.generation).to.equal(1);
 	});
 
 	it('it is not allowed to breed when it is not the owner of the father', async () => {
 		const [owner, anotherAccount] = await ethers.getSigners();
 		const dadDna = 101112101114141;
 		const mumDna = 303132332234343;
-		await nft.mintGenerationZeroKitty(dadDna);
-		await nft.connect(anotherAccount).mintGenerationZeroKitty(mumDna);
+		await nft.mintGenerationZero(dadDna);
+		await nft.connect(anotherAccount).mintGenerationZero(mumDna);
 
 		const toBreed = nft.connect(anotherAccount).breed(1, 2);
 
@@ -166,8 +166,8 @@ describe('The Krypto Kitties Factory', () => {
 		const [owner, anotherAccount] = await ethers.getSigners();
 		const dadDna = 101112101114141;
 		const mumDna = 303132332234343;
-		await nft.connect(anotherAccount).mintGenerationZeroKitty(dadDna);
-		await nft.mintGenerationZeroKitty(mumDna);
+		await nft.connect(anotherAccount).mintGenerationZero(dadDna);
+		await nft.mintGenerationZero(mumDna);
 
 		const toBreed = nft.connect(anotherAccount).breed(1, 2);
 

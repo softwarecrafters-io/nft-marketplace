@@ -15,7 +15,7 @@ export class MarketPlaceService {
 	) {}
 
 	buy(offer: Offer) {
-		return this.marketPlaceInteractor.buyOffer(offer.price, offer.cat.id).pipe(
+		return this.marketPlaceInteractor.buyOffer(offer.price, offer.nft.id).pipe(
 			mergeMap(tx => from(tx.wait())),
 			mergeMap(_ => this.getAllOffers())
 		);
@@ -23,7 +23,6 @@ export class MarketPlaceService {
 
 	createOffer(price: number, tokenId: number) {
 		const priceInWei = utils.parseEther(price.toString());
-		console.log('createOffer', priceInWei.toString(), tokenId);
 		return this.nftService.setApprovalForAll(this.contractAddress).pipe(
 			mergeMap(_ => this.marketPlaceInteractor.createOffer(priceInWei, tokenId)),
 			mergeMap(tx => from(tx.wait())),
@@ -38,7 +37,6 @@ export class MarketPlaceService {
 	}
 
 	getAllOffers() {
-		console.log('getAllOffers');
 		return this.marketPlaceInteractor.getAllTokenIdsOnSale().pipe(
 			tap(v => console.log('tap', v)),
 			map(ids => ids.map(id => this.marketPlaceInteractor.getOfferBy(id.toNumber()))),

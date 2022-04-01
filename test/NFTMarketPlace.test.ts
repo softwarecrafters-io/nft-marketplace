@@ -1,5 +1,5 @@
 import hre from 'hardhat';
-import { KittyFactory as NFT, NFTMarketPlace } from '../../../typechain-types';
+import { NFTCore as NFT, NFTMarketPlace } from '../typechain-types';
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
@@ -11,7 +11,7 @@ describe('The NFT MarketPlace', () => {
 
 	beforeEach(async () => {
 		//Deploy nft
-		const nftContract = await hre.ethers.getContractFactory('KittyFactory');
+		const nftContract = await hre.ethers.getContractFactory('NFTCore');
 		nft = (await nftContract.deploy()) as NFT;
 		await nft.deployed();
 		//Deploy marketplace
@@ -30,9 +30,9 @@ describe('The NFT MarketPlace', () => {
 			signers = await ethers.getSigners();
 			owner = signers[0];
 			const dna = 101112101114141;
-			await nft.mintGenerationZeroKitty(dna);
-			await nft.mintGenerationZeroKitty(dna);
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
+			await nft.mintGenerationZero(dna);
+			await nft.mintGenerationZero(dna);
 		});
 
 		it('registers an offer properly', async () => {
@@ -96,8 +96,8 @@ describe('The NFT MarketPlace', () => {
 			signers = await ethers.getSigners();
 			owner = signers[0];
 			const dna = 101112101114141;
-			await nft.mintGenerationZeroKitty(dna);
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
+			await nft.mintGenerationZero(dna);
 			const priceInWei = utils.parseEther('0.01');
 			await marketPlace.createOffer(priceInWei, tokenId);
 		});
@@ -143,7 +143,7 @@ describe('The NFT MarketPlace', () => {
 			signers = await ethers.getSigners();
 			owner = signers[0];
 			const dna = 101112101114141;
-			await nft.mintGenerationZeroKitty(dna);
+			await nft.mintGenerationZero(dna);
 			await marketPlace.createOffer(priceInWei, tokenId);
 		});
 

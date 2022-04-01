@@ -3,11 +3,7 @@ import { from, Subject } from 'rxjs';
 import { NFTMarketPlace } from '../../typechain-types';
 import { ContractConfig, ContractConnector } from '../application-services/contractConnector';
 
-function fromEtherToWei(ether: string) {
-	return utils.parseEther(ether);
-}
-
-type MarketTransactionDto = {
+export type MarketTransaction = {
 	type: 'Create offer' | 'Remove offer' | 'Buy';
 	address: string;
 	tokenId: number;
@@ -15,12 +11,13 @@ type MarketTransactionDto = {
 
 export class MarketPlaceInteractor {
 	contractAPI: NFTMarketPlace;
-	marketTransactionBus: Subject<MarketTransactionDto> = new Subject();
+	marketTransactionBus: Subject<MarketTransaction> = new Subject();
+
 	constructor(private contractConnector: ContractConnector, private contractConfig: ContractConfig) {
 		this.contractAPI = contractConnector.connect(contractConfig);
 		this.contractAPI.on(this.contractAPI.filters.MarketTransaction(), (...values) =>
 			this.marketTransactionBus.next({
-				type: values[0] as MarketTransactionDto['type'],
+				type: values[0] as MarketTransaction['type'],
 				address: values[1],
 				tokenId: values[2].toNumber(),
 			})

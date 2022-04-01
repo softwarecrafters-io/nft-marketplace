@@ -1,0 +1,21 @@
+.image-home{
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background: white;
+  margin: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.31);
+  width: 75%;
+  img{
+    width: 100%;
+  }
+}
+
+.home{
+  button{
+    font-size: 20px;
+    margin: 25px;
+    padding: 10px 25px;
+  }
+}

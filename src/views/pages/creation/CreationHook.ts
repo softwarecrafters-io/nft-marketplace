@@ -1,9 +1,9 @@
-import { WalletService } from '../../application-services/walletService';
+import { WalletService } from '../../../application-services/walletService';
 import { useState } from 'react';
-import { DNA } from '../components/KittiesFactoryComponent';
-import { NFTService } from '../../services/NFTService';
+import { NFTService } from '../../../services/NFTService';
+import { DNA } from '../../../models/TypeAliases';
 
-export const KittiesFactoryHook = (initialDna: DNA, walletService: WalletService, nftService: NFTService) => {
+export const CreationHook = (initialDna: DNA, walletService: WalletService, nftService: NFTService) => {
 	const [dna, setDna] = useState(initialDna);
 	const updateDnaAt = (index: number, value: number) => {
 		dna[index] = value;

@@ -1,10 +1,9 @@
 import { BigNumber } from 'ethers';
-import { from, map, mergeMap, Subject, zip } from 'rxjs';
-import { KittyFactory } from '../../typechain-types';
+import { from, Subject } from 'rxjs';
+import { NFTCore } from '../../typechain-types';
 import { ContractConfig, ContractConnector } from '../application-services/contractConnector';
-import { Cat } from '../models/models';
 
-type CatDto = {
+export type PetDto = {
 	id: number;
 	mumId: number;
 	dadId: number;
@@ -13,8 +12,8 @@ type CatDto = {
 };
 
 export class NFTInteractor {
-	contractAPI: KittyFactory;
-	birthBus: Subject<CatDto> = new Subject();
+	contractAPI: NFTCore;
+	birthBus: Subject<PetDto> = new Subject();
 
 	constructor(private contractConnector: ContractConnector, private contractConfig: ContractConfig) {
 		this.contractAPI = contractConnector.connect(contractConfig);
@@ -34,11 +33,11 @@ export class NFTInteractor {
 	}
 
 	requestNFTBy(id: number) {
-		return from(this.contractAPI.getKitty(id));
+		return from(this.contractAPI.getPet(id));
 	}
 
 	mintKitty(genes: number) {
-		return from(this.contractAPI.mintGenerationZeroKitty(genes));
+		return from(this.contractAPI.mintGenerationZero(genes));
 	}
 
 	totalSupply() {

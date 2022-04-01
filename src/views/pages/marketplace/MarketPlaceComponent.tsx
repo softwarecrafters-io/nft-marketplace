@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { CatComponent } from './CatComponent';
-import { Factory } from '../../Factory';
+import { Factory } from '../../../Factory';
 import { useEffect, useRef, useState } from 'react';
-import { Layout } from './shared/Layout';
-import { WalletService } from '../../application-services/walletService';
-import { MarketPlaceService } from '../../services/MarketPlaceService';
+import { Layout } from '../../shared/components/Layout';
+import { WalletService } from '../../../application-services/walletService';
+import { MarketPlaceService } from '../../../services/MarketPlaceService';
 import { ethereumLogoSvg } from '../../assets/images/ethereumLogo.svg';
-import { Offer } from '../../models/models';
+import { Offer } from '../../../models/models';
+import { PetComponent } from '../../shared/components/PetComponent';
 
 export const MarketPlaceComponent = () => {
 	const { offers, onBuy } = marketPlaceHook(Factory.getWalletService(), Factory.getMarketPlaceService());
 	const fromCatToComponent = () =>
 		offers.map((offer, i) => (
-			<div className={'cat-box'} key={i}>
-				<CatComponent key={i} dna={offer.cat.genes} />
+			<div className={'pet-box'} key={i}>
+				<PetComponent key={i} dna={offer.nft.genes} />
 				<div className={'dna'}>
-					<span>GEN: {offer.cat.generation}</span>
-					<span>DNA: {offer.cat.genes}</span>
+					<span>GEN: {offer.nft.generation}</span>
+					<span>DNA: {offer.nft.genes}</span>
 				</div>
 				<div className={'offer'}>
 					<span className={'price'}>
@@ -31,7 +31,7 @@ export const MarketPlaceComponent = () => {
 		<Layout>
 			<div className={'container'}>
 				<h1>MarketPlace </h1>
-				<h3>These are your custom Kitties</h3>
+				<h3>These are the available doggies</h3>
 			</div>
 			<div className={'my-kitties-container'}>{fromCatToComponent()}</div>
 		</Layout>

@@ -6,10 +6,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract KittyFactory is ERC721, ERC721Enumerable, Ownable {
+contract NFTCore is ERC721, ERC721Enumerable, Ownable {
     uint256 _tokenIds;
     uint256 public generationZeroCounter;
-    struct Kitty {
+    struct Pet {
         uint256 id;
         uint256 genes;
         uint64 birthTime;
@@ -17,26 +17,26 @@ contract KittyFactory is ERC721, ERC721Enumerable, Ownable {
         uint32 dadId;
         uint16 generation;
     }
-    Kitty[] kitties;
+    Pet[] pets;
     mapping (uint256 => uint256) tokenIdToTokenIndex;
     event Birth(address owner, uint256 kittyId, uint256 mumId, uint256 dadId, uint256 genes);
 
-    constructor() ERC721('Krypto CSS Kitties', 'KCK') {}
+    constructor() ERC721('Krypto CSS Doggies', 'KCD') {}
 
-    function getKitty(uint256 id) public view returns (Kitty memory){
+    function getPet(uint256 id) public view returns (Pet memory){
         uint256 index = tokenIdToTokenIndex[id];
-        return kitties[index];
+        return pets[index];
     }
 
-    function mintGenerationZeroKitty(uint256 genes) public {
+    function mintGenerationZero(uint256 genes) public {
         generationZeroCounter++;
-        mintKitty(0, 0, 0, genes, msg.sender);
+        mintPet(0, 0, 0, genes, msg.sender);
     }
 
-    function mintKitty(uint256 dadId, uint256 mumId, uint256 generation, uint256 genes, address owner) private{
+    function mintPet(uint256 dadId, uint256 mumId, uint256 generation, uint256 genes, address owner) private{
         _tokenIds++;
         uint256 newKittenId = _tokenIds;
-        Kitty memory kitty = Kitty({
+        Pet memory kitty = Pet({
             id:newKittenId,
             genes: genes,
             birthTime: uint64(block.timestamp),
@@ -44,8 +44,8 @@ contract KittyFactory is ERC721, ERC721Enumerable, Ownable {
             dadId: uint32(dadId),
             generation: uint16(generation)
         });
-        tokenIdToTokenIndex[newKittenId] = kitties.length;
-        kitties.push(kitty);
+        tokenIdToTokenIndex[newKittenId] = pets.length;
+        pets.push(kitty);
         _mint(owner, newKittenId);
         emit Birth(owner, newKittenId, uint256(kitty.mumId), uint256(kitty.dadId), kitty.genes);
     }
@@ -54,11 +54,11 @@ contract KittyFactory is ERC721, ERC721Enumerable, Ownable {
         require(ownerOf(dadId) == msg.sender, 'Is not the owner of the father');
         require(ownerOf(mumId) == msg.sender, 'Is not the owner of the mother');
         address owner = msg.sender;
-        Kitty memory dad = getKitty(dadId);
-        Kitty memory mum = getKitty(mumId);
+        Pet memory dad = getPet(dadId);
+        Pet memory mum = getPet(mumId);
         uint256 newDna = _mixDna(dad.genes, mum.genes);
         uint256 newGeneration = calculateGeneration(dad.generation, mum.generation);
-        mintKitty(dadId, mumId, newGeneration, newDna, owner);
+        mintPet(dadId, mumId, newGeneration, newDna, owner);
     }
 
     function calculateGeneration(uint256 dadGeneration, uint256 mumGeneration) private pure returns (uint256){

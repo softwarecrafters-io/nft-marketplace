@@ -1,12 +1,12 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "./KittyFactory.sol";
+import "./NFTCore.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract NFTMarketPlace is Ownable{
     uint constant minimumPrice = 0.01 ether;
-    KittyFactory private _kittyContract;
+    NFTCore private _NFTCoreContract;
     struct Offer {
         uint256 id;
         address payable seller;
@@ -19,12 +19,12 @@ contract NFTMarketPlace is Ownable{
 
     event MarketTransaction(string TxType, address owner, uint256 tokenId);
 
-    constructor(address kittyContractAddress){
-        setKittyContract(kittyContractAddress);
+    constructor(address contractAddress){
+        setNFTCoreContract(contractAddress);
     }
 
-    function setKittyContract(address kittyContractAddress) public onlyOwner{
-        _kittyContract = KittyFactory(kittyContractAddress);
+    function setNFTCoreContract(address contractAddress) public onlyOwner{
+        _NFTCoreContract = NFTCore(contractAddress);
     }
 
     function getAllTokenIdsOnSale() public view returns(uint256[] memory listOfTokenIds){
@@ -60,7 +60,7 @@ contract NFTMarketPlace is Ownable{
 
     function createOffer(uint256 price, uint256 tokenId) public{
         require(price >=  minimumPrice, "NFT price should be equal or greater than 0.01");
-        require(_kittyContract.ownerOf(tokenId) == msg.sender, 'you are not the owner of the nft');
+        require(_NFTCoreContract.ownerOf(tokenId) == msg.sender, 'you are not the owner of the nft');
         //require(tokenIdToOffer[tokenId].active == false, 'Can not sell inactive offer');
         //_kittyContract.approve(address(this), tokenId);
         uint256 offerId = offers.length;
@@ -83,7 +83,7 @@ contract NFTMarketPlace is Ownable{
     }
 
     function removeOffer(uint256 tokenId) public {
-        require(_kittyContract.ownerOf(tokenId) == msg.sender, 'you are not the owner of the nft');
+        require(_NFTCoreContract.ownerOf(tokenId) == msg.sender, 'you are not the owner of the nft');
         _removeOffer(tokenId);
         emit MarketTransaction('Remove offer', msg.sender, tokenId);
     }
@@ -98,7 +98,7 @@ contract NFTMarketPlace is Ownable{
         require(msg.value == offer.price, "The price is not correct");
         require(offer.active == true, 'No active order present');
         _removeOffer(tokenId);
-        _kittyContract.transferFrom(offer.seller, msg.sender, tokenId);
+        _NFTCoreContract.transferFrom(offer.seller, msg.sender, tokenId);
         emit MarketTransaction("Buy", msg.sender, tokenId);
     }
 }

@@ -4,7 +4,7 @@ import { render } from './views';
 
 export function start() {
 	Factory.setBrowserProvider((window as any).ethereum as EthereumProvider);
-	Factory.getWalletService().requestAccounts().subscribe({ next: render, error: console.error });
+	Factory.getWalletService().requestAccounts().subscribe({ next: render, error: render });
 }
 
 start();
