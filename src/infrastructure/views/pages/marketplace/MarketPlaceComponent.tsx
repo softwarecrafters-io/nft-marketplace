@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Factory } from '../../../Factory';
+import { Factory } from '../../../../Factory';
 import { useEffect, useRef, useState } from 'react';
 import { Layout } from '../../shared/components/Layout';
-import { WalletService } from '../../application-services/walletService';
-import { MarketPlaceService } from '../../../domain/services/MarketPlaceService';
+import { WalletService } from '../../../../application-services/walletService';
+import { MarketPlaceService } from '../../../../domain/services/MarketPlaceService';
 import { ethereumLogoSvg } from '../../assets/images/ethereumLogo.svg';
-import { Offer } from '../../../domain/models/models';
+import { Offer } from '../../../../domain/models/models';
 import { PetComponent } from '../../shared/components/PetComponent';
 
 export const MarketPlaceComponent = () => {

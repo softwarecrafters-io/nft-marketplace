@@ -57,7 +57,7 @@ module.exports = (_, { mode }) => ({
 	plugins: [
 		//new NodePolyfillPlugin(),
 		new HtmlWebpackPlugin({
-			template: path.join(__dirname, 'src', 'views/index_template.html'),
+			template: path.join(__dirname, 'src', 'infrastructure/views/index_template.html'),
 			filename: 'index.html',
 			chunks: ['main'],
 		}),

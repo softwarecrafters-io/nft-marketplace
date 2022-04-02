@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ModalPortal } from '../../shared/components/Modal';
 import { NFTListComponent } from '../my-doggies/MyDoggiesComponent';
-import { Factory } from '../../../Factory';
-import { navigationService } from '../../application-services/NavigationService';
+import { Factory } from '../../../../Factory';
+import { navigationService } from '../../../../application-services/NavigationService';
 import { Routes } from '../../Routes';
-import { PetNft } from '../../../domain/models/models';
+import { PetNft } from '../../../../domain/models/models';
 import { Layout } from '../../shared/components/Layout';
 import { PetComponent } from '../../shared/components/PetComponent';
 

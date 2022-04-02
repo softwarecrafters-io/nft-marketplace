@@ -1,11 +1,11 @@
-import { EIP1193Provider, WalletService } from './views/application-services/walletService';
-import { ContractConfig, ContractConnector } from './views/application-services/contractConnector';
+import { EIP1193Provider, WalletService } from './application-services/walletService';
+import { ContractConfig, ContractConnector } from './application-services/contractConnector';
 import NFTCoreMetadata from '../artifacts/contracts/NFTCore.sol/NFTCore.json';
 import MarketPlaceMetadata from '../artifacts/contracts/NFTMarketPlace.sol/NFTMarketPlace.json';
 import { NFTInteractor } from './infrastructure/contract-interactors/NFTInteractor';
 import { ethers } from 'ethers';
 import { Maybe } from 'monet';
-import { NetworkService } from './views/application-services/NetworkService';
+import { NetworkService } from './application-services/NetworkService';
 import { NFTService } from './domain/services/NFTService';
 import { MarketPlaceService } from './domain/services/MarketPlaceService';
 import { MarketPlaceInteractor } from './infrastructure/contract-interactors/MarketPlaceInteractor';
