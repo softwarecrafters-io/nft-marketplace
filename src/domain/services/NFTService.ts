@@ -1,6 +1,6 @@
 import { from, map, mergeMap, Observable, zip } from 'rxjs';
 import { PetNft } from '../models/models';
-import { NFTInteractor } from '../../infrastructure/contract-interactors/NFTInteractor';
+import { NFTInteractor } from '../../infrastructure/blockchain/contract-interactors/NFTInteractor';
 
 export class NFTService {
 	constructor(private nftInteractor: NFTInteractor) {}

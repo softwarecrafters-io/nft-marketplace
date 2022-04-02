@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Factory } from '../../../../Factory';
 import { useEffect, useRef, useState } from 'react';
 import { mergeMap, of } from 'rxjs';
-import { navigationService } from '../../../../application-services/NavigationService';
+import { navigationService } from '../../application-services/NavigationService';
 import { Routes } from '../../Routes';
 import { PetNft } from '../../../../domain/models/models';
 import { Layout } from '../../shared/components/Layout';

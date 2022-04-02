@@ -1,4 +1,4 @@
-import { WalletService } from '../../../../application-services/walletService';
+import { WalletService } from '../../application-services/walletService';
 import { useState } from 'react';
 import { NFTService } from '../../../../domain/services/NFTService';
 import { DNA } from '../../../../domain/models/TypeAliases';

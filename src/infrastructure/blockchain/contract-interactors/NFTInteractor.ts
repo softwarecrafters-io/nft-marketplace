@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
 import { from, Subject } from 'rxjs';
-import { NFTCore } from '../../../typechain-types';
-import { ContractConfig, ContractConnector } from '../../application-services/contractConnector';
+import { NFTCore } from '../../../../typechain-types';
+import { ContractConfig, ContractConnector } from '../application-services/contractConnector';
 
 export type PetDto = {
 	id: number;

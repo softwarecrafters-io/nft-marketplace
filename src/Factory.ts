@@ -1,14 +1,14 @@
-import { EIP1193Provider, WalletService } from './application-services/walletService';
-import { ContractConfig, ContractConnector } from './application-services/contractConnector';
+import { EIP1193Provider, WalletService } from './infrastructure/views/application-services/walletService';
+import { ContractConfig, ContractConnector } from './infrastructure/blockchain/application-services/contractConnector';
 import NFTCoreMetadata from '../artifacts/contracts/NFTCore.sol/NFTCore.json';
 import MarketPlaceMetadata from '../artifacts/contracts/NFTMarketPlace.sol/NFTMarketPlace.json';
-import { NFTInteractor } from './infrastructure/contract-interactors/NFTInteractor';
+import { NFTInteractor } from './infrastructure/blockchain/contract-interactors/NFTInteractor';
 import { ethers } from 'ethers';
 import { Maybe } from 'monet';
-import { NetworkService } from './application-services/NetworkService';
+import { NetworkService } from './infrastructure/views/application-services/NetworkService';
 import { NFTService } from './domain/services/NFTService';
 import { MarketPlaceService } from './domain/services/MarketPlaceService';
-import { MarketPlaceInteractor } from './infrastructure/contract-interactors/MarketPlaceInteractor';
+import { MarketPlaceInteractor } from './infrastructure/blockchain/contract-interactors/MarketPlaceInteractor';
 
 export class Factory {
 	static readonly nftCoreAddress = '0xc6D04bC67A19E91Cc1Fc629c1e0273832B5Ae9aa';

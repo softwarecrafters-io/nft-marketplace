@@ -1,8 +1,8 @@
 import { Factory } from '../../../../Factory';
-import { WalletService } from '../../../../application-services/walletService';
+import { WalletService } from '../../application-services/walletService';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { navigationService } from '../../../../application-services/NavigationService';
+import { navigationService } from '../../application-services/NavigationService';
 
 export const MetamaskComponent = () => {
 	const navService = navigationService();
