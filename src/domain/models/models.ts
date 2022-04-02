@@ -1,5 +1,5 @@
 import { BigNumber, utils } from 'ethers';
-import { NFTCore } from '../../typechain-types';
+import { NFTCore } from '../../../typechain-types';
 import { ColorsRecord, DNA } from './TypeAliases';
 
 export class Offer {

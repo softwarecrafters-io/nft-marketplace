@@ -1,6 +1,6 @@
 import { from, map, mergeMap, Observable, zip } from 'rxjs';
 import { PetNft } from '../models/models';
-import { NFTInteractor } from '../contract-interactors/NFTInteractor';
+import { NFTInteractor } from '../../infrastructure/contract-interactors/NFTInteractor';
 
 export class NFTService {
 	constructor(private nftInteractor: NFTInteractor) {}
@@ -10,7 +10,7 @@ export class NFTService {
 	}
 
 	mint(genes: number) {
-		return this.nftInteractor.mintKitty(genes).pipe(mergeMap(tx => from(tx.wait())));
+		return this.nftInteractor.mintGenerationZero(genes).pipe(mergeMap(tx => from(tx.wait())));
 	}
 
 	breed(dadId: number, mumId: number) {
@@ -18,7 +18,7 @@ export class NFTService {
 	}
 
 	getNFTById(tokenId: number): Observable<PetNft> {
-		return this.nftInteractor.requestNFTBy(tokenId).pipe(map(cat => PetNft.createFrom(cat)));
+		return this.nftInteractor.requestNFTBy(tokenId).pipe(map(pet => PetNft.createFrom(pet)));
 	}
 
 	getPetWithValidDNAByOwner(account: string) {
@@ -30,8 +30,8 @@ export class NFTService {
 			mergeMap(requestsToGetIndexes => zip(...requestsToGetIndexes)),
 			map(ids => ids.map(id => this.nftInteractor.requestNFTBy(id.toNumber()))),
 			mergeMap(requestsToGetNFTData => zip(...requestsToGetNFTData)),
-			map(cats => cats.filter(cat => PetNft.isValidDNA(PetNft.fromNumberToDna(cat.genes.toNumber())))),
-			map(cats => cats.map(cat => PetNft.createFrom(cat)))
+			map(pets => pets.filter(pet => PetNft.isValidDNA(PetNft.fromNumberToDna(pet.genes.toNumber())))),
+			map(pets => pets.map(pet => PetNft.createFrom(pet)))
 		);
 	}
 

@@ -1,18 +1,18 @@
-import { EIP1193Provider, WalletService } from './application-services/walletService';
-import { ContractConfig, ContractConnector } from './application-services/contractConnector';
-import KittyFactoryMetadata from '../artifacts/contracts/NFTCore.sol/NFTCore.json';
+import { EIP1193Provider, WalletService } from './views/application-services/walletService';
+import { ContractConfig, ContractConnector } from './views/application-services/contractConnector';
+import NFTCoreMetadata from '../artifacts/contracts/NFTCore.sol/NFTCore.json';
 import MarketPlaceMetadata from '../artifacts/contracts/NFTMarketPlace.sol/NFTMarketPlace.json';
-import { NFTInteractor } from './contract-interactors/NFTInteractor';
+import { NFTInteractor } from './infrastructure/contract-interactors/NFTInteractor';
 import { ethers } from 'ethers';
 import { Maybe } from 'monet';
-import { NetworkService } from './application-services/NetworkService';
-import { NFTService } from './services/NFTService';
-import { MarketPlaceService } from './services/MarketPlaceService';
-import { MarketPlaceInteractor } from './contract-interactors/MarketPlaceInteractor';
+import { NetworkService } from './views/application-services/NetworkService';
+import { NFTService } from './domain/services/NFTService';
+import { MarketPlaceService } from './domain/services/MarketPlaceService';
+import { MarketPlaceInteractor } from './infrastructure/contract-interactors/MarketPlaceInteractor';
 
 export class Factory {
-	static readonly nftCoreAddress = '0x544D64fEED5F0DCf9162112B720cD981A3454071';
-	static readonly marketPlaceAddress = '0xB80E3d0A733fb84A2244B0A0e972B3eDb930b1f4';
+	static readonly nftCoreAddress = '0xc6D04bC67A19E91Cc1Fc629c1e0273832B5Ae9aa';
+	static readonly marketPlaceAddress = '0xb7Eee86696cAB78016187c5A50b57F2ce83036e5';
 	static readonly validChainId = '0x539';
 	static readonly nodeUrl = 'http://127.0.0.1:7545';
 
@@ -62,9 +62,9 @@ export class Factory {
 		return this.networkService;
 	}
 
-	static getKittyFactoryInteractor() {
+	static getNFTCoreInteractor() {
 		if (this.nftInteractor == null) {
-			const configContract = ContractConfig.create(this.nftCoreAddress, KittyFactoryMetadata);
+			const configContract = ContractConfig.create(this.nftCoreAddress, NFTCoreMetadata);
 			this.nftInteractor = new NFTInteractor(this.getContractConnector(), configContract);
 		}
 		return this.nftInteractor;
@@ -72,7 +72,7 @@ export class Factory {
 
 	static getNftService() {
 		if (this.nftService == null) {
-			return new NFTService(this.getKittyFactoryInteractor());
+			return new NFTService(this.getNFTCoreInteractor());
 		}
 		return this.nftService;
 	}

@@ -1,7 +1,7 @@
 import { BigNumber, utils } from 'ethers';
 import { from, Subject } from 'rxjs';
-import { NFTMarketPlace } from '../../typechain-types';
-import { ContractConfig, ContractConnector } from '../application-services/contractConnector';
+import { NFTMarketPlace } from '../../../typechain-types';
+import { ContractConfig, ContractConnector } from '../../views/application-services/contractConnector';
 
 export type MarketTransaction = {
 	type: 'Create offer' | 'Remove offer' | 'Buy';

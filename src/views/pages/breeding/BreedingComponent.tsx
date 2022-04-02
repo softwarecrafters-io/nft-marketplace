@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ModalPortal } from '../../shared/components/Modal';
 import { NFTListComponent } from '../my-doggies/MyDoggiesComponent';
 import { Factory } from '../../../Factory';
-import { navigationService } from '../../../application-services/NavigationService';
+import { navigationService } from '../../application-services/NavigationService';
 import { Routes } from '../../Routes';
-import { PetNft } from '../../../models/models';
+import { PetNft } from '../../../domain/models/models';
 import { Layout } from '../../shared/components/Layout';
 import { PetComponent } from '../../shared/components/PetComponent';
 
@@ -26,7 +26,7 @@ export const BreedingComponent = () => {
 
 	const canBreed = () => mum != null && dad != null;
 	const breed = () => {
-		Factory.getKittyFactoryInteractor()
+		Factory.getNFTCoreInteractor()
 			.breed(dad.id, mum.id)
 			.subscribe(() => navigate(Routes.myNfts));
 	};

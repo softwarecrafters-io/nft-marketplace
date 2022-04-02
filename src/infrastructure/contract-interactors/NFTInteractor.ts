@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers';
 import { from, Subject } from 'rxjs';
-import { NFTCore } from '../../typechain-types';
-import { ContractConfig, ContractConnector } from '../application-services/contractConnector';
+import { NFTCore } from '../../../typechain-types';
+import { ContractConfig, ContractConnector } from '../../views/application-services/contractConnector';
 
 export type PetDto = {
 	id: number;
@@ -36,7 +36,7 @@ export class NFTInteractor {
 		return from(this.contractAPI.getPet(id));
 	}
 
-	mintKitty(genes: number) {
+	mintGenerationZero(genes: number) {
 		return from(this.contractAPI.mintGenerationZero(genes));
 	}
 
@@ -45,6 +45,7 @@ export class NFTInteractor {
 	}
 
 	balanceOf(accountAddress: string) {
+		console.log(accountAddress);
 		return from(this.contractAPI.balanceOf(accountAddress));
 	}
 

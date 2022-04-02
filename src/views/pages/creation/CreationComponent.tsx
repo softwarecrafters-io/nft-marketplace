@@ -3,7 +3,7 @@ import { Factory } from '../../../Factory';
 import { CreationHook } from './CreationHook';
 import { Layout } from '../../shared/components/Layout';
 import { PetComponent } from '../../shared/components/PetComponent';
-import { DNA } from '../../../models/TypeAliases';
+import { DNA } from '../../../domain/models/TypeAliases';
 
 export const CreationComponent = () => {
 	const initialDna: DNA = [10, 11, 12, 10, 1, 1, 14, 14, 1];

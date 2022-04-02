@@ -1,8 +1,8 @@
-import { NFTService } from '../../../services/NFTService';
-import { MarketPlaceService } from '../../../services/MarketPlaceService';
+import { NFTService } from '../../../domain/services/NFTService';
+import { MarketPlaceService } from '../../../domain/services/MarketPlaceService';
 import { useEffect, useState } from 'react';
 import { Maybe, Nothing } from 'monet';
-import { Offer, PetNft } from '../../../models/models';
+import { Offer, PetNft } from '../../../domain/models/models';
 
 export function DetailsHook(nftId: string, nftService: NFTService, marketPlaceService: MarketPlaceService) {
 	const [maybeNFT, updateMaybeNFT] = useState(Nothing<PetNft>());

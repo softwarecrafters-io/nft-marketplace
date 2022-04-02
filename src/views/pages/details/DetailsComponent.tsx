@@ -1,6 +1,6 @@
 import React from 'react';
 import { Factory } from '../../../Factory';
-import { PetNft } from '../../../models/models';
+import { PetNft } from '../../../domain/models/models';
 import { useParams } from 'react-router';
 import { Layout } from '../../shared/components/Layout';
 import { PetComponent } from '../../shared/components/PetComponent';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from '../../shared/components/Layout';
 import { Routes } from '../../Routes';
-import { navigationService } from '../../../application-services/NavigationService';
+import { navigationService } from '../../application-services/NavigationService';
 
 export const Home = () => {
 	const { navigate } = navigationService();

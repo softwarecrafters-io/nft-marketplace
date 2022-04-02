@@ -10,7 +10,6 @@ This template includes:
 * ESLint
 * Prettier
 
-![DAPP TEMPLATE](ethereum-ts.png)
 
 ## Prerequisites (just for watch mode)
 ```shell

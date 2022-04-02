@@ -1,7 +1,7 @@
 import React from 'react';
 import { allColors } from '../utils/colors';
-import { DNA } from '../../../models/TypeAliases';
-import { PetAttributes } from '../../../models/models';
+import { DNA } from '../../../domain/models/TypeAliases';
+import { PetAttributes } from '../../../domain/models/models';
 
 export const PetComponent = (props: { dna: DNA }) => {
 	const attributes = PetAttributes.create(props.dna, allColors());

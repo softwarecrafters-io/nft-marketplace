@@ -9,7 +9,7 @@ export const ethereumLogoSvg = () => (
 			x="0px"
 			y="0px"
 			viewBox="0 0 1920 1920"
-			enable-background="new 0 0 1920 1920"
+			enableBackground="new 0 0 1920 1920"
 		>
 			<script />
 			<g>

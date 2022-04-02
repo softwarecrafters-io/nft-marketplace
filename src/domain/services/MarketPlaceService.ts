@@ -2,7 +2,7 @@ import { Offer } from '../models/models';
 import { from, map, mergeMap, Subject, tap, zip } from 'rxjs';
 import { NFTService } from './NFTService';
 import { BigNumber, utils } from 'ethers';
-import { MarketPlaceInteractor } from '../contract-interactors/MarketPlaceInteractor';
+import { MarketPlaceInteractor } from '../../infrastructure/contract-interactors/MarketPlaceInteractor';
 
 export class MarketPlaceService {
 	offers: Offer[] = [];
