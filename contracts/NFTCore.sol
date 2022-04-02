@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 contract NFTCore is ERC721, ERC721Enumerable, Ownable {
-    uint256 _tokenIds;
-    uint256 public generationZeroCounter;
+    uint256 private _tokenIds;
+    uint256 private _generationZeroCounter;
     struct Pet {
         uint256 id;
         uint256 genes;
@@ -16,19 +16,23 @@ contract NFTCore is ERC721, ERC721Enumerable, Ownable {
         uint32 dadId;
         uint16 generation;
     }
-    Pet[] pets;
-    mapping (uint256 => uint256) tokenIdToTokenIndex;
+    Pet[] private _pets;
+    mapping (uint256 => uint256) private _tokenIdToTokenIndex;
     event Birth(address owner, uint256 kittyId, uint256 mumId, uint256 dadId, uint256 genes);
 
     constructor() ERC721('Krypto CSS Doggies', 'KCD') {}
 
+    function getGenerationZeroCounter() public view returns(uint256){
+        return _generationZeroCounter;
+    }
+
     function getPet(uint256 id) public view returns (Pet memory){
-        uint256 index = tokenIdToTokenIndex[id];
-        return pets[index];
+        uint256 index = _tokenIdToTokenIndex[id];
+        return _pets[index];
     }
 
     function mintGenerationZero(uint256 genes) public {
-        generationZeroCounter++;
+        _generationZeroCounter++;
         mintPet(0, 0, 0, genes, msg.sender);
     }
 
@@ -43,8 +47,8 @@ contract NFTCore is ERC721, ERC721Enumerable, Ownable {
             dadId: uint32(dadId),
             generation: uint16(generation)
         });
-        tokenIdToTokenIndex[newKittenId] = pets.length;
-        pets.push(kitty);
+        _tokenIdToTokenIndex[newKittenId] = _pets.length;
+        _pets.push(kitty);
         _mint(owner, newKittenId);
         emit Birth(owner, newKittenId, uint256(kitty.mumId), uint256(kitty.dadId), kitty.genes);
     }

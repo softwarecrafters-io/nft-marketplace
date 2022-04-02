@@ -36,7 +36,7 @@ describe('The NFT Core', () => {
 
 		await nft.mintGenerationZero(dna);
 
-		const counter = await nft.generationZeroCounter();
+		const counter = await nft.getGenerationZeroCounter();
 		expect(counter).to.equal(1);
 	});
 

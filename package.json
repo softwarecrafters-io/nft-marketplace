@@ -27,12 +27,14 @@
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "bignumber.js": "^9.0.2",
+    "generate-contract-interface": "^0.1.13",
     "monet": "^0.9.3",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "rxjs": "^7.5.4",
+    "sol2uml": "^1.1.29",
     "stream-browserify": "^3.0.0",
     "web3": "^1.7.0"
   },

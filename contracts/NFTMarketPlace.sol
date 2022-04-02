@@ -14,8 +14,8 @@ contract NFTMarketPlace is Ownable{
         uint256 tokenId;
         bool active;
     }
-    Offer[] public offers;
-    mapping (uint256 => uint256) tokenIdToOfferIndex;
+    Offer[] private _offers;
+    mapping (uint256 => uint256) private _tokenIdToOfferIndex;
 
     event MarketTransaction(string TxType, address owner, uint256 tokenId);
 
@@ -28,7 +28,7 @@ contract NFTMarketPlace is Ownable{
     }
 
     function getAllTokenIdsOnSale() public view returns(uint256[] memory listOfTokenIds){
-        uint256 totalOffers = offers.length;
+        uint256 totalOffers = _offers.length;
         if (totalOffers == 0) {
             return new uint256[](0);
         }
@@ -37,8 +37,8 @@ contract NFTMarketPlace is Ownable{
         uint offerId;
         uint index;
         while(offerId < totalOffers){
-            if(offers[offerId].active == true){
-                tokenIdsOnSale[index] = offers[offerId].tokenId;
+            if(_offers[offerId].active == true){
+                tokenIdsOnSale[index] = _offers[offerId].tokenId;
                 index++;
             }
             offerId++;
@@ -50,7 +50,7 @@ contract NFTMarketPlace is Ownable{
         uint256 offerIndex;
         uint256 activeOffersCounter;
         while(offerIndex < totalOffers){
-            if(offers[offerIndex].active == true){
+            if(_offers[offerIndex].active == true){
                 activeOffersCounter += 1;
             }
             offerIndex++;
@@ -63,7 +63,7 @@ contract NFTMarketPlace is Ownable{
         require(_NFTCoreContract.ownerOf(tokenId) == msg.sender, 'you are not the owner of the nft');
         //require(tokenIdToOffer[tokenId].active == false, 'Can not sell inactive offer');
         //_kittyContract.approve(address(this), tokenId);
-        uint256 offerId = offers.length;
+        uint256 offerId = _offers.length;
         Offer memory offer = Offer({
             id: offerId,
             seller: payable(msg.sender),
@@ -71,13 +71,13 @@ contract NFTMarketPlace is Ownable{
             active: true,
             tokenId: tokenId
         });
-        tokenIdToOfferIndex[tokenId] = offerId;
-        offers.push(offer);
+        _tokenIdToOfferIndex[tokenId] = offerId;
+        _offers.push(offer);
         emit MarketTransaction('Create offer', msg.sender, tokenId);
     }
 
     function getOffer(uint256 tokenId) public view returns (Offer memory) {
-        Offer storage offer = offers[tokenIdToOfferIndex[tokenId]];
+        Offer storage offer = _offers[_tokenIdToOfferIndex[tokenId]];
         require(offer.seller != address(0), 'This token has not have any offer');
         return (offer);
     }
@@ -89,12 +89,12 @@ contract NFTMarketPlace is Ownable{
     }
 
     function _removeOffer(uint256 tokenId) private{
-        offers[tokenIdToOfferIndex[tokenId]].active = false;
-        delete tokenIdToOfferIndex[tokenId];
+        _offers[_tokenIdToOfferIndex[tokenId]].active = false;
+        delete _tokenIdToOfferIndex[tokenId];
     }
 
     function buyNft(uint256 tokenId) public payable{
-        Offer memory offer = offers[tokenIdToOfferIndex[tokenId]];
+        Offer memory offer = _offers[_tokenIdToOfferIndex[tokenId]];
         require(msg.value == offer.price, "The price is not correct");
         require(offer.active == true, 'No active order present');
         _removeOffer(tokenId);
