@@ -35,12 +35,9 @@ export const DetailsComponent = () => {
 			<div className={'container'}>
 				{renderNFT()}
 				<div className={'offer-input'}>
-					<input
-						type={'number'}
-						placeholder={'Price (ethers)'}
-						onChange={e => onUpdateCurrentOffer(e.target.value)}
-					/>
 					<button onClick={onCreateOffer}>Create Offer</button>
+					<input type={'number'} placeholder={'0.01'} onChange={e => onUpdateCurrentOffer(e.target.value)} />
+					<span>ETH</span>
 				</div>
 			</div>
 		</Layout>

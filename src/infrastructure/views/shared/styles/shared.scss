@@ -138,21 +138,30 @@ button:hover{
 .offer-input{
   display: flex;
   justify-content: center;
-  margin-top:-20px ;
-  padding: 7px 75px;
+  background: white;
+  width: 380px;
+  margin-top: 20px ;
+  padding: 10px 57px;
   font-size: 0.9375rem;
-  background: rgba(255,255,255,0.2);
   border-radius: 15px;
-  width: 20%;
   align-items: center;
   box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.31);
+
   input{
-    border: 0;
-    width: 109px;
-    height: 24px;
-    border-radius: 5px;
+    border: 1px solid #eeeeee;
+    border-right: none;
+    width: 45px;
+    height: 25px;
+    border-radius: 5px 0 0 5px;
     padding: 0.375rem 0.5em;
-    margin: 0.5em;
+    margin: 0.5em 0 0.5em 0.5em;
+  }
+  span{
+    border: 1px solid #eeeeee;
+    background: #eeeeee;
+    padding: 10px 5px 9px;
+    border-radius: 0px 5px 5px 0px;
+
   }
 }
 

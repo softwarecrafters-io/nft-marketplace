@@ -38,7 +38,6 @@ export class MarketPlaceService {
 
 	getAllOffers() {
 		return this.marketPlaceInteractor.getAllTokenIdsOnSale().pipe(
-			tap(v => console.log('tap', v)),
 			map(ids => ids.map(id => this.marketPlaceInteractor.getOfferBy(id.toNumber()))),
 			mergeMap(requests => zip(...requests)),
 			map(offers =>
